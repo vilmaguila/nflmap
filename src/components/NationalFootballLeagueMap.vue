@@ -2,17 +2,22 @@
   <div style="height: 350px">
     <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center">
       <l-tile-layer :url="url"></l-tile-layer>
+      <l-geo-json :geojson="data"/>
     </l-map>
   </div>
 </template>
 
 <script>
-import { LMap, LTileLayer } from "vue2-leaflet";
+import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet";
 
 export default {
   components: {
     LMap,
     LTileLayer,
+    LGeoJson
+  },
+  props: {
+      data: Object
   },
   data() {
     return {
