@@ -1,6 +1,6 @@
 <template>
   <div class="about">
-    <h1>This page will host a map with NFL stadium locations</h1>
+    <h1>NFL Stadium locations</h1>
     <national-football-league-map :data="stadium_data" />
   </div>
 </template>
