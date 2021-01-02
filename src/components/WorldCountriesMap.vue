@@ -1,8 +1,8 @@
 <template>
-  <div style="height: 350px">
+  <div style="height: 600px">
     <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center">
-      <l-tile-layer :url="url"></l-tile-layer>
-      <l-geo-json :geojson="data"/>
+      <l-tile-layer :url="url" />
+      <l-geo-json v-if="data" :geojson="european_data" />
     </l-map>
   </div>
 </template>
@@ -14,10 +14,10 @@ export default {
   components: {
     LMap,
     LTileLayer,
-    LGeoJson
+    LGeoJson,
   },
   props: {
-      data: Object
+    data: Object,
   },
   data() {
     return {
@@ -27,5 +27,12 @@ export default {
     };
   },
   methods: {},
+  computed: {
+    european_data() {
+      return this.data["features"].filter(feature =>{
+        return feature.properties.ADMIN === 'Finland'
+      })
+    }
+  },
 };
 </script>
