@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import NFL from "../views/NFL.vue";
+import NFL from "../views/NFL.vue"
+import CountriesMap from '../views/Countries.vue'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     name: 'NFL',
     component: NFL
   },
+  {
+    path: '/countries',
+    name: 'Countries',
+    component: CountriesMap
+  }
 ]
 
 const router = new VueRouter({
