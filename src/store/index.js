@@ -9,6 +9,13 @@ export default new Vuex.Store({
     nfldata: null,
     countriesdata: null,
   },
+  getters: {
+    finland: state => {
+      return state.countriesdata['features'].filter(feature => {
+        return feature.properties.ADMIN === 'Finland'
+      })
+    }
+  },
   mutations: {
     SET_POSTS(state, nfldata) {
       state.nfldata = nfldata

@@ -20,6 +20,9 @@ export default {
   computed: {
     countries_data() {
       return this.$store.state.countriesdata
+    },
+    finland_data() {
+      return this.$store.getters.finland
     }
   }
 }
