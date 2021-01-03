@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import axios from 'axios'
+import api from '../api'
 
 Vue.use(Vuex)
 
@@ -26,15 +26,21 @@ export default new Vuex.Store({
   },
   actions: {
     fetch_stadium_data({commit}) {
-      axios.get("https://gist.githubusercontent.com/brianhatchl/59d99872a9cfc0e126211192673991b8/raw/bf706c06ef41f05a35b1bd730639eed54cc7af27/stadiums.json")
+      api.third_party.get_nfl_stadiums()
         .then(response => {
           commit('SET_POSTS', response.data)
         })
+        .catch(error => {
+          console.log(error)
+        })
     },
     fetch_countries_data({commit}) {
-      axios.get("https://pkgstore.datahub.io/core/geo-countries/countries/archive/23f420f929e0e09c39d916b8aaa166fb/countries.geojson")
+      api.third_party.get_world_countries()
         .then(response => {
           commit('SET_COUNTRIES', response.data)
+        })
+        .catch(error => {
+          console.log(error)
         })
     }
   },
