@@ -11,9 +11,11 @@ export default new Vuex.Store({
   },
   getters: {
     finland: state => {
-      return state.countriesdata['features'].filter(feature => {
-        return feature.properties.ADMIN === 'Finland'
-      })
+      if (state.countriesdata) {
+        return state.countriesdata['features'].filter(feature => {
+          return feature.properties.ADMIN === 'Finland'
+        })
+      }
     }
   },
   mutations: {
@@ -25,7 +27,7 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    fetch_stadium_data({commit}) {
+    fetch_stadium_data({ commit }) {
       api.third_party.get_nfl_stadiums()
         .then(response => {
           commit('SET_POSTS', response.data)
@@ -34,7 +36,7 @@ export default new Vuex.Store({
           console.log(error)
         })
     },
-    fetch_countries_data({commit}) {
+    fetch_countries_data({ commit }) {
       api.third_party.get_world_countries()
         .then(response => {
           commit('SET_COUNTRIES', response.data)

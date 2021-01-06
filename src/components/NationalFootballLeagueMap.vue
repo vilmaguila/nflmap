@@ -2,7 +2,7 @@
   <div style="height: 350px">
     <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center">
       <l-tile-layer :url="url"></l-tile-layer>
-      <l-geo-json :geojson="data"/>
+      <l-geo-json :geojson="data" :options="options"/>
     </l-map>
   </div>
 </template>
@@ -27,5 +27,24 @@ export default {
     };
   },
   methods: {},
+  computed: {
+    options() {
+      return {
+        onEachFeature: this.onEachFeatureFunction
+      };
+    },
+    onEachFeatureFunction() {
+      return (feature, layer) => {
+        layer.bindTooltip(
+          "<div>code:" +
+            feature.properties.Conference +
+            "</div><div>nom: " +
+            feature.properties.Team +
+            "</div>",
+          { permanent: false, sticky: true }
+        );
+      };
+    }
+  }
 };
 </script>
