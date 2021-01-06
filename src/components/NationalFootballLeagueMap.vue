@@ -8,7 +8,7 @@
         :key="index"
         :geojson="data"
         :visible="item.visible"
-        :options="options"
+        :options="options_method(item.conference)"
       />
     </l-map>
   </div>
@@ -35,18 +35,25 @@ export default {
       data_conf: init_data,
     };
   },
-  methods: {},
+  methods: {
+    options_method(condition) {
+      return {
+        onEachFeature: this.onEachFeatureFunction,
+        filter: this.filterFunction(condition),
+      };
+    },
+    filterFunction(condition) {
+      return (feature) => {
+        return feature.properties.Conference === condition;
+      };
+    },
+  },
   computed: {
     options() {
       return {
         onEachFeature: this.onEachFeatureFunction,
         filter: this.filterFunction,
       };
-    },
-    filterFunction() {
-      return (feature) => {
-        return feature.properties.Conference === 'AFC'
-      }
     },
     onEachFeatureFunction() {
       return (feature, layer) => {
