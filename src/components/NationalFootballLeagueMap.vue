@@ -1,8 +1,15 @@
 <template>
   <div style="height: 350px">
-    <l-map style="height: 80%; width: 100%" :zoom="zoom" :center="center">
+    <l-map
+      style="height: 80%; width: 100%"
+      :zoom="zoom"
+      :options="{ zoomControl: false }"
+      :center="center"
+    >
       <l-tile-layer :url="url"></l-tile-layer>
-      <!-- <l-geo-json :geojson="data" :options="options"/> -->
+      <l-control>
+        <toggler-control />
+      </l-control>
       <l-geo-json
         v-for="(item, index) in data_conf"
         :key="index"
@@ -15,7 +22,7 @@
 </template>
 
 <script>
-import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet";
+import { LMap, LTileLayer, LGeoJson, LControl } from "vue2-leaflet";
 import init_data from "../common/init_nfl.js";
 
 export default {
@@ -23,6 +30,7 @@ export default {
     LMap,
     LTileLayer,
     LGeoJson,
+    LControl,
   },
   props: {
     data: Object,
